@@ -154,6 +154,16 @@ class SyncUITests: BaseTestCase {
         XCTAssertTrue(app.cells.switches["sync.engine.passwords.enabled"].exists)
         XCTAssertTrue(app.cells.textFields["DeviceNameSettingTextField"].exists)
         XCTAssertTrue(app.cells["SignOut"].exists)
+        disconnectAccount()
+    }
+
+    private func disconnectAccount() {
+        app.cells["SignOut"].tap()
+        app.buttons["Disconnect"].tap()
+        // Remove the history so that starting to sign is does not keep the userEmail
+        navigator.nowAt(BrowserTab)
+        navigator.goto(BrowserTabMenu)
+        navigator.performAction(Action.AcceptClearPrivateData)
     }
 
     func allowNotifications () {
