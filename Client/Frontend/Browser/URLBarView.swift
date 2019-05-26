@@ -147,6 +147,8 @@ class URLBarView: UIView {
         // @TODO: figure out if there is an iOS standard way to do this that works with accessibility.
         button.isAccessibilityElement = false
         button.addTarget(self, action: #selector(tappedScrollToTopArea), for: .touchUpInside)
+        button.accessibilityIdentifier = "urlBar-scrollToTop"
+        button.accessibilityLabel = "Scroll to top"
         return button
     }()
 
@@ -408,6 +410,10 @@ class URLBarView: UIView {
 
     func setAutocompleteSuggestion(_ suggestion: String?) {
         locationTextField?.setAutocompleteSuggestion(suggestion)
+    }
+
+    func setScrollToTopButtonAccessibility(_ isAccessibilityElement: Bool) {
+        scrollToTopButton.isAccessibilityElement = isAccessibilityElement
     }
 
     func setLocation(_ location: String?, search: Bool) {
